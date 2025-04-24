@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css">
+    <title>Upload de Imagem</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1C1C1C;
+            margin: 0;
+        }
+        .container {background-color: #1C1C1C;
+            padding: 20px;
+            border-radius: 8px;
+            border: solid 1px yellow;
+            box-shadow: 0 0 15px rgba(241, 196, 15, 0.8), 0 0 30px rgba(241, 196, 15, 0.5);
+            width: 350px;
+            height: 600px;
+            text-align: center;
+            
+        }
+        h1 {
+            font-size: 1.5em;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .upload-btn {
+          display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background-color: transparent;
+            border: solid 0.1px yellow;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 5em;
+            width: 100%;
+            height: 400px;
+            margin-bottom: 25px;
+          
+            
+        }
+        .upload-btn-2 {
+          display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background-color: yellow;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+            margin-bottom: 15px;
+          
+        }
+        .upload-btn .mdi {
+            margin-right: 8px;
+        }
+        #linkContainer a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        #linkContainer a:hover {
+            text-decoration: underline;
+        }
+        .error {
+            color: #d32f2f;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="mdi mdi-cloud-upload-outline"></i> Upload de Imagem</h1>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <label for="imageFile">
+                <button type="button" class="upload-btn">
+                    <i class="mdi mdi-folder-image"></i>
+                </button>
+            </label>
+            <input type="file" id="imageFile" name="imageFile" accept="image/*" required>
+            <button type="submit" class="upload-btn-2">
+                <i class="mdi mdi-upload"></i> Enviar
+            </button>
+        </form>
+        <div id="linkContainer"></div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData();
+            const fileInput = document.getElementById('imageFile');
+
+            if (fileInput.files.length > 0) {
+                formData.append('image', fileInput.files[0]);
+
+                fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const linkContainer = document.getElementById('linkContainer');
+                    linkContainer.innerHTML = ''; // Limpa resultados anteriores
+
+                    if (data.link) {
+                        const link = document.createElement('a');
+                        link.href = data.link;
+                        link.textContent = 'Clique aqui para acessar sua imagem';
+                        link.target = "_blank";
+                        linkContainer.appendChild(link);
+                    } else {
+                        linkContainer.innerHTML = `<span class="error">Erro ao enviar o arquivo.</span>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+            } else {
+                alert('Por favor, selecione uma imagem.');
+            }
+        });
+
+        // Abre o seletor de arquivo ao clicar no botão "Selecionar Imagem"
+        document.querySelector('.upload-btn').addEventListener('click', function() {
+            document.getElementById('imageFile').click();
+        });
+    </script>
+</body>
+</html>
+

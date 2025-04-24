@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Apis pagas e gratuitas~">
+    <meta name="robots" content="archive, follow, imageindex, index, odp, snippet, translate">
+    <meta name="author" content="">
+    <title>NODZ API'S</title>
+    <meta property="og:site_name" name="og:site_name" content="NODZ API's">
+    <meta property="og:title" name="og:title" content="NODZ API'S">
+    <meta property="og:image" content="https://pomf2.lain.la/f/y2vi1ego.jpg">
+    <meta property="og:url" name="og:url" content="/">
+    <meta property="og:description" name="og:description" content="Rest Api para vc">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css">
+    <style>
+        #imagem-container {
+            display: none;
+            text-align: center;
+            margin-top: -400px;
+        }
+        #imagem-container  {
+          display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Fixa na tela */
+    width: 100%;
+    height: 100%;
+    top: 700px;
+    
+    background-color: #1C1C1C; /* Fundo levemente transparente */
+    z-index: 1000; /* Certifique-se de que está acima de outros elementos */
+    text-align: center;
+    
+            
+        }
+        .logo {
+          width: 400px;
+          height: 400px;
+          border: solid 0.1px yellow;
+          box-shadow: 0 0 15px rgba(241, 196, 15, 0.8), 0 0 30px rgba(241, 196, 15, 0.5);
+          border-radius: 20px;
+          margin-top: -200px;
+        }
+        .teste {
+          width: 400px;
+          height: 400px;
+          margin-top: 200px;
+        }
+        html {
+    background: #1C1C1C;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
+}
+        .play {
+          color: #000;
+          background-color: yellow;
+          font-size: 40px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(241, 196, 15, 0.8), 0 0 30px rgba(241, 196, 15, 0.5);
+            transition: transform 0.3s;
+            margin-top: 100px;
+            animation: pulse 1.5s ease infinite alternate;
+        }
+        .doc {
+          color: #000;
+          background-color: yellow;
+          font-size: 40px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(241, 196, 15, 0.8), 0 0 30px rgba(241, 196, 15, 0.5);
+            transition: transform 0.3s;
+            margin-top: 200px;
+            animation: pulse 1.5s ease infinite alternate;
+        }
+                        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.05);
+            }
+        }
+    </style>
+    <script>
+        function mostrarImagem() {
+            document.getElementById("imagem-container").style.display = "block";
+        }
+    </script>
+</head>
+<body>
+<center>
+  <img class="teste" src="https://i.imgur.com/6AYIJuz.gif" alt="Descrição da animação">
+  <br>
+    <button class="play" onclick="window.location.href='carregamento.html'>ABRIR</button>
+
+    <div id="imagem-container" style="display:none;">
+      <center>
+        <img class="logo" src="https://telegra.ph/file/0444962fdd8794109ee13.jpg" alt="Imagem Exibida">
+        <br>
+        <button class="doc" onclick="window.location.href='carregamento.html'">DOCS</button>
+        </center>
+    </div>
+</center>
+</body>
+</html>
