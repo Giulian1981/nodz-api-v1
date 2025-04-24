@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de Imagem</title>
+</head>
+<body>
+    <h1>Upload de Imagem</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label for="imageFile">Selecione uma imagem:</label>
+        <input type="file" id="imageFile" name="imageFile" accept="image/*" required>
+        <br><br>
+        <button type="submit">Enviar</button>
+    </form>
+    <div id="linkContainer"></div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData();
+            const fileInput = document.getElementById('imageFile');
+
+            if (fileInput.files.length > 0) {
+                formData.append('image', fileInput.files[0]);  // Certifique-se de que o nome 'image' corresponde ao backend
+
+                fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const linkContainer = document.getElementById('linkContainer');
+                    linkContainer.innerHTML = '';  // Limpa resultados anteriores
+
+                    if (data.link) {
+                        const link = document.createElement('a');
+                        link.href = data.link;
+                        link.textContent = 'Clique aqui para acessar sua imagem';
+                        link.target = "_blank";
+                        linkContainer.appendChild(link);
+                    } else {
+                        linkContainer.textContent = 'Erro ao enviar o arquivo.';
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+            } else {
+                alert('Por favor, selecione uma imagem.');
+            }
+        });
+    </script>
+</body>
+</html>
